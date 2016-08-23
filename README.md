@@ -8,7 +8,7 @@ Masquerade is Substratum's background service that runs functions that should ru
 https://github.com/TeamSubstratum/masquerade
 
 # pull requests
-At the moment, pull requests to dev would be accepted to ensure that we can test it extensively before pushing to our stable "master" branch.
+At the moment, pull requests to nicholaschum:dev would be accepted to ensure that we can test it extensively before pushing to our stable "master" branch. https://github.com/nicholaschum/substratum/tree/dev
 
 # team code review
 To submit a code patch towards any platform applications, please direct them all to our Gerrit server
