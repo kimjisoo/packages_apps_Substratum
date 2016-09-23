@@ -103,7 +103,7 @@ public class AntiPiracyCheck {
                                 appInfo.metaData.getString("Substratum_Parent"))) {
                             Log.d("OverlayVerification", package_name + " " +
                                     "unauthorized to be used on this device.");
-                            unauthorized_packages.add(package_name);
+//                            unauthorized_packages.add(package_name);
                         }
                     } else {
                         Log.d("OverlayVerification", package_name + " " +
