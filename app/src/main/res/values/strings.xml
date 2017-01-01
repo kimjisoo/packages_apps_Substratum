@@ -1,10 +1,10 @@
 <resources>
-    <string name="app_name">substratum</string>
-    <string name="masquerade">masquerade</string>
-    <string name="legacy_app_name">substratum legacy</string>
+    <string name="app_name" translatable="false">substratum</string>
+    <string name="masquerade" translatable="false">masquerade</string>
+    <string name="legacy_app_name" translatable="false">substratum legacy</string>
     <string name="showcase">community showcase</string>
     <string name="helper_name">substratum overlay helper</string>
-    <string name="drawer_name">projekt substratum</string>
+    <string name="drawer_name" translatable="false">projekt substratum</string>
     <string name="restore_app_name">restore theme</string>
 
     <string name="search_play_store_url" translatable="false">
@@ -226,11 +226,11 @@
     <string name="settings_aapt">AAPT (Stable)</string>
     <string name="settings_aopt">AOPT (Cutting Edge)</string>
 
-    <string name="theme_information_tab_two">Overlay Manager</string>
-    <string name="theme_information_tab_three">Boot animations</string>
-    <string name="theme_information_tab_four">Font Packs</string>
-    <string name="theme_information_tab_five">Sound Packs</string>
-    <string name="theme_information_tab_six">Wallpapers</string>
+    <string name="theme_information_tab_one">Overlay Manager</string>
+    <string name="theme_information_tab_two">Boot animations</string>
+    <string name="theme_information_tab_three">Font Packs</string>
+    <string name="theme_information_tab_four">Sound Packs</string>
+    <string name="theme_information_tab_five">Wallpapers</string>
 
     <string name="nougat_style_cards_title">Nougat Style Card Layout</string>
     <string name="nougat_style_cards_subtext">Enable Android Nougat Notification styled theme
@@ -286,20 +286,18 @@
 
     <string name="accept">Accept</string>
     <string name="deny">Deny</string>
-    <string name="permission_explanation_title">Substratum Permissions</string>
-    <string name="permission_explanation_text">You need to accept a few crucial permissions required
-        by Substratum to function properly.\n\n<b>Storage: </b> Substratum needs to utilize your
-        internal storage to place temporary compilation caches, as well as storing your system
-        rescue archives, located in /storage/emulated/0/substratum/.\n\n<b>Phone: </b>Substratum
-        needs to read your device\'s IMEI and generate a unique ID from it. This is also used to
-        verify licenses and mark your own overlays as your very own! <b>Substratum will never make
-            any phone calls nor read your phone numbers!</b>\n\n<b>Contacts: </b> Substratum
-        utilizes access of contacts for the bug report system to themers when you encounter an
-        issue. In conjunction with the phone permission, this also ensures that your device overlays
-        are intact.\n\n<b>Firebase: </b>Substratum utilizes Google\'s Firebase Analytics to gather
-        and analyze user experience data in order to improve core services and security enhancements
-        for future updates.\n\nIf you deny one of these permissions, Substratum may not be able to
-        function as expected.
+    <string name="permission_explanation_title">Permissions Overview</string>
+    <string name="permission_explanation_text">Substratum may not function as expected without these
+        few crucial permissions granted.\n\n<b>Storage: </b> Substratum needs to utilize your
+        internal storage to store your system rescue archives, located in
+        /storage/emulated/0/substratum/.\n\n<b>Get Accounts (Contacts): </b> Substratum
+        utilizes the GET_ACCOUNTS permission to obtain the main device\'s email address when Google
+        Play and Firebase automatically sends bug reports to our database. Unfortunately due to
+        Android 7.0\'s changes in permissions, GET_ACCOUNTS has been merged into the Contacts group
+        permission, ultimately displaying a request to read contacts. <b>Substratum will never read
+            any of your contacts!</b>\n\n<b>Firebase: </b>
+        Substratum utilizes Google\'s Firebase Analytics to gather and analyze user experience data
+        in order to improve core services and security enhancements for future updates.
     </string>
 
     <string name="priority_back_title">Back to overlays</string>
@@ -448,7 +446,7 @@
     <string name="toast_backup_success">Current overlay list saved to
         \"/storage/emulated/0/substratum/profiles/%s\"
     </string>
-    <string name="spinner_default_item">select a profile to restore&#8230;</string>
+    <string name="spinner_default_item">select a profile&#8230;</string>
 
     <string name="select_to_toggle_all_overlays">Select to toggle all overlays</string>
     <string name="fab_menu_select_to_toggle_all_overlays">Select all overlays</string>
@@ -898,4 +896,22 @@
     <string name="slide_6_text">thank you for reading the introduction and we hope you enjoy using
         substratum as much as we did while developing for it!
     </string>
+
+    <string name="scheduled_night_profile">Scheduled Contextual Profiles</string>
+    <string name="scheduled_profile_card_content">This function gives you the possibility to
+        automatically switch between profiles based on the time of day.</string>
+    <string name="active_time">Active times</string>
+    <string name="start_time">Start</string>
+    <string name="end_time">End</string>
+    <string name="day_profile">Day profile</string>
+    <string name="night_profile">Night profile</string>
+    <string name="day">Day</string>
+    <string name="night">Night</string>
+    <string name="apply">Apply</string>
+    <string name="time_empty_warning">Please configure Start and End times!</string>
+    <string name="profile_empty_warning">Please select all the profiles you want enabled!</string>
+    <string name="profile_notification_title">%s profile</string>
+    <string name="profile_pending_notification">Profile will be changed after screen is off.</string>
+    <string name="profile_success_notification">Profile successfully applied!</string>
+    <string name="profile_failed_notification">Profile failed to apply&#8230;</string>
 </resources>

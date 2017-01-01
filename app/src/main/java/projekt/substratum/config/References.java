@@ -19,8 +19,8 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.preference.PreferenceManager;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
-import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -85,7 +85,6 @@ public class References {
     public static String metadataName = "Substratum_Name";
     public static String metadataAuthor = "Substratum_Author";
     public static String metadataLegacy = "Substratum_Legacy";
-    public static String metadataWallpapers = "Substratum_Wallpapers";
     // These strings control the nav drawer filter for ThemeFragment
     public static String homeFragment = "";
     public static String overlaysFragment = "overlays";
@@ -105,6 +104,7 @@ public class References {
     // These strings control package names for system apps
     public static String settingsPackageName = "com.android.settings";
     public static String settingsSubstratumDrawableName = "ic_settings_substratum";
+    private static String metadataWallpapers = "Substratum_Wallpapers";
     private static String metadataVersion = "Substratum_Plugin";
     private static String metadataThemeReady = "Substratum_ThemeReady";
 
@@ -174,6 +174,13 @@ public class References {
             setAndCheckOMS(context);
         }
         return prefs.getInt("oms_version", 0);
+    }
+
+    // This method is used to obtain the device ID of the current device (set up)
+    @SuppressLint("HardwareIds")
+    public static String getDeviceID(Context context) {
+        return Settings.Secure.getString(context.getContentResolver(),
+                Settings.Secure.ANDROID_ID);
     }
 
     // These methods are now used to interact with the console to output the proper commands whether
@@ -773,26 +780,6 @@ public class References {
         return null;
     }
 
-    // Compare Overlay IMEI
-    public static Boolean compareOverlayIMEI(Context mContext, String package_name) {
-        try {
-            ApplicationInfo appInfo = mContext.getPackageManager().getApplicationInfo(
-                    package_name, PackageManager.GET_META_DATA);
-            if (appInfo.metaData != null) {
-                if (appInfo.metaData.getString("Substratum_IMEI") != null) {
-                    String imei = "!" + getDeviceIMEI(mContext);
-                    String overlay = appInfo.metaData.getString("Substratum_IMEI");
-                    if (overlay != null) {
-                        return overlay.equals(imei);
-                    }
-                }
-            }
-        } catch (Exception e) {
-            //
-        }
-        return false;
-    }
-
     // Grab IconPack Parent
     public static Boolean grabIconPack(Context mContext, String package_name,
                                        String expectedPackName) {
@@ -813,20 +800,10 @@ public class References {
         String[] checker = ShowMeYourFierceEyes.withSomeMascaraOn();
         for (String check : checker) {
             if (References.isPackageInstalled(context, check)) {
-                backupDebuggableStatistics(context, "luckypatcher-user",
-                        References.getDeviceIMEI(context), null);
                 return true;
             }
         }
         return false;
-    }
-
-    // Grab Device IMEI for Overlay Embedding
-    @SuppressLint("HardwareIds")
-    public static String getDeviceIMEI(Context context) {
-        TelephonyManager telephonyManager =
-                (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-        return telephonyManager.getDeviceId();
     }
 
     // Launch intent for a theme
@@ -1169,6 +1146,26 @@ public class References {
         return packages;
     }
 
+    public static String parseTime(Context context, int hour, int minute) {
+        Locale locale;
+        String parse;
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            locale = context.getResources().getConfiguration().getLocales().get(0);
+        } else {
+            locale = context.getResources().getConfiguration().locale;
+        }
+
+        if (android.text.format.DateFormat.is24HourFormat(context)) {
+            parse = String.format(locale, "%02d:%02d", hour, minute);
+        } else {
+            String AM_PM = hour <= 12 ? "AM" : "PM";
+            hour = hour <= 12 ? hour : hour - 12;
+            parse = String.format(locale, "%d:%02d " + AM_PM, hour, minute);
+        }
+        return parse;
+    }
+
     @IgnoreExtraProperties
     @SuppressWarnings("WeakerAccess")
     /*
@@ -1178,16 +1175,16 @@ public class References {
 
         public String CurrentTime;
         public String FireBaseID;
-        public long IMEI;
+        public long ID;
         public String Reason;
         public int VersionCode;
         public String VersionName;
 
-        public DeviceCollection(String CurrentTime, String FireBaseID, long IMEI, String Reason,
+        public DeviceCollection(String CurrentTime, String FireBaseID, long ID, String Reason,
                                 int VersionCode, String VersionName) {
             this.CurrentTime = CurrentTime;
             this.FireBaseID = FireBaseID;
-            this.IMEI = IMEI;
+            this.ID = ID;
             this.Reason = Reason;
             this.VersionCode = VersionCode;
             this.VersionName = VersionName;
